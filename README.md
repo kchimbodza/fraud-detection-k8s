@@ -1,6 +1,6 @@
-# fraud-detection-k8s
+# fintech-fraud-detection
 
-A Kubernetes demo using a financial transaction processor that flags suspicious amounts above the FINTRAC $10,000 CAD reporting threshold. Built to demonstrate core Kubernetes concepts on a self-hosted 3-node k3s cluster running on KVM/QEMU virtual machines.
+A financial transaction processor that flags suspicious amounts above the FINTRAC $10,000 CAD reporting threshold, deployed on a self-hosted 3-node Kubernetes cluster running on KVM/QEMU virtual machines.
 
 ## What This Demonstrates
 
@@ -49,13 +49,13 @@ A Kubernetes demo using a financial transaction processor that flags suspicious 
 
 ### 5. Self-Healing — Automatic Pod Recovery
 ![Self Healing](screenshots/self-healing.png)
-*The pod is manually deleted to simulate a crash. Kubernetes immediately detects the missing pod and schedules a replacement — the new pod is Running within 2 seconds with zero manual intervention. This is one of the core reliability features of Kubernetes.*
+*The pod is manually deleted to simulate a crash. Kubernetes immediately detects the missing pod and schedules a replacement — the new pod is Running within 2 seconds with zero manual intervention.*
 
 ---
 
 ### 6. HPA Scale-Up — 1 Pod Grows to 5 Under Load
 ![HPA Scale Up](screenshots/hpa-scale-up.png)
-*50 parallel workers flood the API with requests, pushing CPU usage to ~110m per pod (above the 50m threshold). The Horizontal Pod Autoscaler automatically scales from 1 pod to 5 pods to handle the load. The right terminal shows the load test running; the left shows all 5 pods Running simultaneously.*
+*50 parallel workers flood the API with requests, pushing CPU usage to ~110m per pod (above the 50m threshold). The Horizontal Pod Autoscaler automatically scales from 1 pod to 5 pods to handle the load.*
 
 ---
 
@@ -99,8 +99,8 @@ POST /transaction
 ### 1. Build and push the image
 ```bash
 cd app/
-docker build -t myviewsontech/fraud-detection-k8s:v1 .
-docker push myviewsontech/fraud-detection-k8s:v1
+docker build -t myviewsontech/fintech-fraud-detection:v1 .
+docker push myviewsontech/fintech-fraud-detection:v1
 ```
 
 ### 2. Deploy to cluster
@@ -151,7 +151,7 @@ bash scripts/demo-rolling-update.sh
 ## Project Structure
 
 ```
-fraud-detection-k8s/
+fintech-fraud-detection/
 ├── app/
 │   ├── main.py
 │   ├── Dockerfile
